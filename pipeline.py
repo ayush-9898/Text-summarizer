@@ -1,12 +1,3 @@
-# ============================================================
-# pipeline.py
-# PURPOSE: Ties everything together — the full RAG pipeline.
-#          This is the main entry point for programmatic use.
-#
-# FLOW:
-#   Text → Preprocess → Chunk → Embed → FAISS
-#   Query → Embed → Retrieve → LLM → Summary
-# ============================================================
 
 import fitz  # PyMuPDF — for reading PDF files
 from utils.preprocessing import preprocess_text
@@ -89,18 +80,18 @@ class RAGSummarizerPipeline:
         print("🚀 Starting RAG Summarization Pipeline")
         print("="*50)
 
-        # ── Step 1: Preprocess ──────────────────────────────
+        # ── Preprocess ──────────────────────────────
         print("\n📝 Step 1: Preprocessing text...")
         processed = preprocess_text(text)
         clean_text = processed["cleaned_text"]
         print(f"   Words: {len(processed['tokens'])} | "
               f"Sentences: {len(processed['sentences'])}")
 
-        # ── Step 2: Ingest into FAISS ───────────────────────
+        # ── Ingest into FAISS ───────────────────────
         print("\n🗄️  Step 2: Chunking & building vector index...")
         num_chunks = self.retriever.ingest(clean_text)
 
-        # ── Step 3: Retrieve relevant chunks ────────────────
+        # ── Retrieve relevant chunks ────────────────
         retrieved_chunks = []
         if use_rag:
             print(f"\n🔍 Step 3: Retrieving top-{self.top_k} relevant chunks...")
@@ -111,7 +102,7 @@ class RAGSummarizerPipeline:
             context = clean_text
             print("\n⏭️  Step 3: Skipping retrieval (RAG disabled)")
 
-        # ── Step 4: Summarize ───────────────────────────────
+        # ── Summarize ───────────────────────────────
         print("\n✍️  Step 4: Generating summary with BART...")
         min_len, max_len = self.LENGTH_MAP.get(summary_length, (100, 150))
 
@@ -129,7 +120,7 @@ class RAGSummarizerPipeline:
                 min_length=min_len,
             )
 
-        # ── Step 5: Return results ──────────────────────────
+        # ── Return results ──────────────────────────
         print("\n✅ Pipeline complete!")
 
         return {
