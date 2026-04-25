@@ -1,0 +1,31 @@
+# ============================================================
+# RAG Text Summarizer - Requirements
+# Install with: pip install -r requirements.txt
+# ============================================================
+
+# --- NLP Libraries ---
+nltk==3.8.1                  # Tokenization, stopwords, lemmatization
+spacy==3.7.2                 # Advanced NLP pipeline
+
+# --- Embeddings ---
+sentence-transformers==2.6.1 # Converts text to vectors (all-MiniLM-L6-v2)
+
+# --- Vector Database ---
+faiss-cpu==1.7.4             # Fast similarity search (use faiss-gpu if you have GPU)
+
+# --- LLM / Transformers ---
+transformers==4.38.2         # BART, T5 summarization models
+torch==2.2.1                 # Required by transformers
+
+# --- PDF Support ---
+PyMuPDF==1.23.26             # Read PDF files (fitz)
+
+# --- Evaluation ---
+rouge-score==0.1.2           # ROUGE evaluation metric
+
+# --- Web UI ---
+streamlit==1.32.2            # Simple web interface
+
+# --- Utilities ---
+numpy==1.26.4
+tqdm==4.66.2                 # Progress bars
