@@ -1,17 +1,8 @@
-# ============================================================
-# utils/embeddings.py
-# PURPOSE: Convert text into numerical vectors (embeddings)
-#          so we can compare meaning/similarity between chunks.
-# ============================================================
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
 # ── Load the embedding model ────────────────────────────────
-# 'all-MiniLM-L6-v2' is a small, fast, accurate model (80MB).
-# It converts any sentence into a 384-dimensional vector.
-# First run: downloads the model automatically from HuggingFace.
-
 MODEL_NAME = "all-MiniLM-L6-v2"
 print(f"⏳ Loading embedding model: {MODEL_NAME} ...")
 embedding_model = SentenceTransformer(MODEL_NAME)
@@ -70,19 +61,4 @@ def cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -> float:
     return dot_product / norm
 
 
-# ── Quick test ──────────────────────────────────────────────
-if __name__ == "__main__":
-    sentences = [
-        "Artificial intelligence is transforming the world.",
-        "Machine learning is a part of AI.",
-        "I love eating pizza on weekends.",
-    ]
 
-    vecs = get_embeddings(sentences)
-    print(f"\n📐 Embedding shape: {vecs.shape}")  # (3, 384)
-
-    # Compare similarity
-    sim_ai_ml = cosine_similarity(vecs[0], vecs[1])
-    sim_ai_pizza = cosine_similarity(vecs[0], vecs[2])
-    print(f"\n🔗 AI ↔ ML similarity    : {sim_ai_ml:.3f}")   # should be HIGH
-    print(f"🔗 AI ↔ Pizza similarity : {sim_ai_pizza:.3f}") # should be LOW

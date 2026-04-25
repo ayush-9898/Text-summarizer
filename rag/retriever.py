@@ -1,8 +1,3 @@
-# ============================================================
-# rag/retriever.py
-# PURPOSE: The "R" in RAG — retrieves relevant context chunks
-#          from the vector store to help the LLM summarize better.
-# ============================================================
 
 from rag.vector_store import VectorStore
 from utils.chunking  import chunk_by_sentences
@@ -81,26 +76,4 @@ class Retriever:
         return "\n\n".join(chunks)
 
 
-# ── Quick test ──────────────────────────────────────────────
-if __name__ == "__main__":
-    text = """
-    Artificial intelligence (AI) is intelligence demonstrated by machines.
-    It is used in many industries around the world.
-    Machine learning is a subset of artificial intelligence.
-    Deep learning is a powerful technique in machine learning.
-    Neural networks form the foundation of deep learning systems.
-    Natural language processing (NLP) allows machines to understand text.
-    NLP is used in chatbots, translation, and summarization systems.
-    Computer vision enables machines to interpret visual information.
-    AI is used in healthcare to detect diseases from medical images.
-    Self-driving cars use AI for navigation and obstacle detection.
-    """
 
-    retriever = Retriever(chunk_size=3, overlap=1)
-    retriever.ingest(text)
-
-    query = "What is deep learning used for?"
-    print(f"\n🔍 Query: '{query}'")
-    results = retriever.retrieve(query, top_k=2)
-    for i, chunk in enumerate(results):
-        print(f"\n📄 Chunk {i+1}: {chunk}")

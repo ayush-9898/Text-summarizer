@@ -1,8 +1,3 @@
-# ============================================================
-# utils/chunking.py
-# PURPOSE: Split long text into smaller overlapping chunks
-#          so the embedding model can process them easily.
-# ============================================================
 
 from utils.preprocessing import tokenize_sentences
 
@@ -77,16 +72,4 @@ def print_chunks(chunks: list[str]) -> None:
         print(chunk[:200], "..." if len(chunk) > 200 else "")
 
 
-# ── Quick test ──────────────────────────────────────────────
-if __name__ == "__main__":
-    sample = """
-    Artificial intelligence is intelligence demonstrated by machines.
-    It is used in many industries around the world.
-    Machine learning is a subset of AI.
-    Deep learning is a subset of machine learning.
-    Neural networks are the backbone of deep learning.
-    Natural language processing helps computers understand text.
-    Computer vision helps machines interpret images.
-    """
-    chunks = chunk_by_sentences(sample, chunk_size=3, overlap=1)
-    print_chunks(chunks)
+

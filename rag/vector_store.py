@@ -1,11 +1,3 @@
-# ============================================================
-# rag/vector_store.py
-# PURPOSE: Store text chunk embeddings in FAISS and search them.
-#
-# FAISS = Facebook AI Similarity Search
-# It's like a super-fast search engine for vectors.
-# Instead of keywords, it finds chunks with SIMILAR MEANING.
-# ============================================================
 
 import faiss
 import numpy as np
@@ -101,25 +93,3 @@ class VectorStore:
         return len(self.chunks)
 
 
-# ── Quick test ──────────────────────────────────────────────
-if __name__ == "__main__":
-    sample_chunks = [
-        "Artificial intelligence enables computers to learn from data.",
-        "Machine learning algorithms improve with more training examples.",
-        "Deep learning uses neural networks with many layers.",
-        "Natural language processing helps understand human language.",
-        "I enjoy cooking pasta and making Italian food at home.",
-    ]
-
-    # Build the vector store
-    store = VectorStore()
-    store.build_index(sample_chunks)
-
-    # Search for relevant chunks
-    query = "How does AI learn from data?"
-    print(f"\n🔍 Query: '{query}'")
-
-    results = store.search(query, top_k=2)
-    for i, r in enumerate(results):
-        print(f"\n📄 Result {i+1} (score: {r['score']:.3f}):")
-        print(f"   {r['chunk']}")

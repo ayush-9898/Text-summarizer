@@ -1,21 +1,16 @@
-# ============================================================
-# app.py
-# PURPOSE: Streamlit web interface for the RAG Summarizer
-#
-# Run with: streamlit run app.py
-# ============================================================
+
 
 import streamlit as st
-import fitz  # PyMuPDF for PDF reading
+import fitz  
 
-# ── Page config (must be first Streamlit call) ──────────────
+
 st.set_page_config(
     page_title="RAG Text Summarizer",
     page_icon="📝",
     layout="wide",
 )
 
-# ── Custom CSS ───────────────────────────────────────────────
+# ── CSS ───────────────────────────────────────────────
 st.markdown("""
 <style>
     .main-header { font-size: 2.5rem; font-weight: bold; color: #1f77b4; }

@@ -1,15 +1,3 @@
-# ============================================================
-# evaluate.py
-# PURPOSE: Measure the quality of generated summaries.
-#
-# ROUGE = Recall-Oriented Understudy for Gisting Evaluation
-# It compares your generated summary to a reference (gold) summary
-# by counting word overlaps.
-#
-# ROUGE-1: Overlap of single words
-# ROUGE-2: Overlap of word pairs (bigrams)
-# ROUGE-L: Longest common subsequence
-# ============================================================
 
 from rouge_score import rouge_scorer
 
@@ -73,19 +61,3 @@ def print_evaluation(scores: dict) -> None:
         print()
 
 
-# ── Quick test ──────────────────────────────────────────────
-if __name__ == "__main__":
-    generated = (
-        "AI is transforming healthcare and transportation. "
-        "Machine learning models detect cancer with high accuracy. "
-        "Challenges include bias and job displacement."
-    )
-
-    reference = (
-        "Artificial intelligence has transformed many industries. "
-        "In healthcare, AI detects diseases from images. "
-        "Concerns about algorithmic bias and employment remain."
-    )
-
-    scores = evaluate_summary(generated, reference)
-    print_evaluation(scores)

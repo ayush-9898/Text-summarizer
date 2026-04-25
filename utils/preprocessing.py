@@ -1,7 +1,3 @@
-# ============================================================
-# utils/preprocessing.py
-# PURPOSE: Clean and prepare raw text before processing
-# ============================================================
 
 import re
 import nltk
@@ -78,19 +74,19 @@ def preprocess_text(text: str) -> dict:
     - filtered_tokens  : words without stopwords
     - lemmatized_tokens: root-form words
     """
-    # Step 1: Clean
+    # Clean
     cleaned = clean_text(text)
 
-    # Step 2: Split into sentences
+    # Split into sentences
     sentences = tokenize_sentences(cleaned)
 
-    # Step 3: Split into words
+    # Split into words
     tokens = tokenize_words(cleaned)
 
-    # Step 4: Remove stopwords
+    # Remove stopwords
     filtered = remove_stopwords(tokens)
 
-    # Step 5: Lemmatize
+    # Lemmatize
     lemmatized = lemmatize_words(filtered)
 
     return {
@@ -102,14 +98,4 @@ def preprocess_text(text: str) -> dict:
     }
 
 
-# ── Quick test ──────────────────────────────────────────────
-if __name__ == "__main__":
-    sample = """
-    Natural Language Processing (NLP) is a subfield of linguistics and artificial 
-    intelligence concerned with the interactions between computers and human language.
-    It is used to apply machine learning algorithms to text and speech.
-    """
-    result = preprocess_text(sample)
-    print("✅ Sentences:", result["sentences"])
-    print("✅ Filtered tokens (first 10):", result["filtered_tokens"][:10])
-    print("✅ Lemmatized (first 10):",      result["lemmatized_tokens"][:10])
+
